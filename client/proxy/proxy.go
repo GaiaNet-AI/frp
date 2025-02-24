@@ -198,6 +198,7 @@ func (pxy *BaseProxy) HandleTCPWorkConnection(workConn net.Conn, m *msg.StartWor
 	localConn, err := libdial.Dial(
 		net.JoinHostPort(baseCfg.LocalIP, strconv.Itoa(baseCfg.LocalPort)),
 		libdial.WithTimeout(10*time.Second),
+		libdial.WithKeepAlive(60*time.Second),
 	)
 	if err != nil {
 		workConn.Close()
